@@ -1,0 +1,63 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+/coverage-ts
+
+# next.js
+/.next/
+/out/
+
+# production
+/build
+
+# misc
+.DS_Store
+*.pem
+.vscode/*
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# vercel
+.vercel
+
+# logs
+combined.log
+error.log
+
+.node_history
+dump.rdb
+
+.npmrc
+
+/prisma/docs
+
+*.dump
+*.dump.*
+/src/forms/*.pdf
+
+/tests/ignore/*
+/tests/unit/coverage/*
+tsconfig.tsbuildinfo
+
+# for tracing
+ts_trace_folder
+
+scratch.txt
+
+# local appConfig override
+/src/config/localConfig.ts

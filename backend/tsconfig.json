@@ -1,0 +1,52 @@
+{
+  // there is a bug w/ ts node where extends breaks rn
+  // I copied the tsconfig directly
+  //  "extends": "@tsconfig/node20/tsconfig.json",
+  "compilerOptions": {
+    "lib": ["es2023"],
+    "module": "node16",
+    "target": "es2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "moduleResolution": "node16",
+    "strictPropertyInitialization": false,
+    "outDir": "./build",
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "jsx": "react",
+    "noErrorTruncation": false,
+    "incremental": true,
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules",
+    "prisma",
+    "./src/fireball/archive/*.ts",
+    "./src/fireball/archive/*.sql"
+  ],
+  "include": [
+    "./src/**/*.ts",
+    "./src/**/*.tsx",
+    "./tests/**/*.ts",
+    "./.github/**/*.ts",
+    "./src/modules.d.ts"
+  ],
+  "ts-node": {
+    "swc": true,
+    "compilerOptions": {
+      "module": "nodenext", // switch to CommonJS to generate models
+      "target": "ESNext"
+    }
+  }
+}

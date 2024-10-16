@@ -1,0 +1,27 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/",
+    "build/",
+    "coverage/",
+    "prisma/",
+    "scripts/",
+    "tests/",
+    "*.docx",
+    "*.pdf",
+    "src/fireball/",
+    "src/crons/",
+    "src/fixtures/",
+    "src/gSheetModelGraph/"
+  ],
+  "watch": ["src/*"],
+  "execMap": {
+    "ts": "node -r @swc-node/register"
+  },
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": "js,json,ts,tsx",
+  "verbose": true
+}
