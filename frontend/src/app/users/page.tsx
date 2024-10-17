@@ -1,19 +1,28 @@
 "use client"; //NOTE: this is required for next client side rendering
 import {
+  Alert,
   Anchor,
   Box,
   Button,
-  Card,
+  Text,
   Container,
   Divider,
+  Group,
   Stack,
   TextInput,
   Title,
+  Loader,
 } from "@mantine/core";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
+import { useCreateUserMutation, useUsersQuery } from "./User.generated";
+import { namedOperations } from "../../graphql/namedOperations.generated";
 
 const CreateUserForm = () => {
+  const [create, { loading }] = useCreateUserMutation({
+    refetchQueries: [namedOperations.Query.Users],
+  });
+
   type FormFields = {
     name: string;
     email: string;
@@ -23,11 +32,18 @@ const CreateUserForm = () => {
 
   return (
     <Box>
-      <Title>Add User</Title>
+      <Title order={4}>Add User</Title>
       <form
-        onSubmit={handleSubmit((formData) => {
-          console.log(formData);
-        })}
+        onSubmit={handleSubmit(async (formData) =>
+          create({
+            variables: {
+              input: {
+                email: formData.email,
+                name: formData.name,
+              },
+            },
+          }),
+        )}
       >
         <Stack gap="xs">
           <TextInput
@@ -48,10 +64,38 @@ const CreateUserForm = () => {
               },
             })}
           />
-          <Button type="submit">Add</Button>
+          <Button loading={loading} type="submit">
+            Add
+          </Button>
         </Stack>
       </form>
     </Box>
+  );
+};
+
+const UserList = () => {
+  const { loading, error, data } = useUsersQuery();
+
+  if (error) {
+    return <Alert title="uh oh">{error.message}</Alert>;
+  }
+
+  return (
+    <>
+      <Group>
+        <Title order={5}>All Users</Title>
+        {loading ? <Loader size="xs" type="bars" /> : null}
+      </Group>
+      <Divider />
+      {data?.users.map((user) => {
+        return (
+          <Group>
+            <Text fw="500">{user.name}</Text>
+            <Text>{user.email}</Text>
+          </Group>
+        );
+      })}
+    </>
   );
 };
 
@@ -65,6 +109,7 @@ export default function Users() {
         </Anchor>
         <Divider />
         <CreateUserForm />
+        <UserList />
       </Stack>
     </Container>
   );

@@ -1,6 +1,7 @@
 import "@mantine/core/styles.css";
 
 import { ColorSchemeScript, MantineProvider } from "@mantine/core";
+import GqlProvider from "./apolloClient";
 
 export const metadata = {
   title: "My Shepherd Warm Up",
@@ -18,7 +19,9 @@ export default function RootLayout({
         <ColorSchemeScript />
       </head>
       <body>
-        <MantineProvider>{children}</MantineProvider>
+        <MantineProvider>
+          <GqlProvider>{children}</GqlProvider>
+        </MantineProvider>
       </body>
     </html>
   );

@@ -1,11 +1,15 @@
-import { Anchor, Container, Divider, Stack, Title } from "@mantine/core";
+import { Anchor, Container, Divider, Group, Stack, Title } from "@mantine/core";
 import Link from "next/link";
+import ShepherdSvg from "./ShepherdSvg";
 
 export default function Home() {
   return (
     <Container p="xl" size="xs">
       <Stack gap="sm">
-        <Title>Hello World!</Title>
+        <Group justify="space-between">
+          <Title>Hello World!</Title>
+          <ShepherdSvg />
+        </Group>
         <Divider />
         <Title order={4}>Links</Title>
         <Anchor component={Link} href="/users">
