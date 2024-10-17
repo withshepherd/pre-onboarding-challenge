@@ -1,6 +1,7 @@
 import Fastify from "fastify";
 import formbody from "@fastify/formbody";
 import logger, { LOG_LEVEL } from "./logger";
+import { getServer } from "./graphql";
 
 export const fastify = Fastify({
   logger,
@@ -12,33 +13,31 @@ export const fastify = Fastify({
 const start = async () => {
   fastify.register(formbody);
 
-  //   const yoga = getServer();
+  const yoga = getServer();
 
   fastify.addContentTypeParser("multipart/form-data", {}, (_, __, done) =>
     done(null)
   );
 
-  // TODO: @sam please implement
-  //   fastify.route({
-  //     url: "/api/graphql",
-  //     method: ["GET", "POST", "OPTIONS"],
-  //     handler: async (req, reply) => {
-  //       // Second parameter adds Fastify's `req` and `reply` to the GraphQL Context
-  //       const response = await yoga.handleNodeRequest(req, {
-  //         req,
-  //         reply,
-  //       });
+  fastify.route({
+    url: "/api/graphql",
+    method: ["GET", "POST", "OPTIONS"],
+    handler: async (req, reply) => {
+      // Second parameter adds Fastify's `req` and `reply` to the GraphQL Context
+      const response = await yoga.handleNodeRequest(req, {
+        req,
+        reply,
+      });
 
-  //       response.headers.forEach((value, key) => {
-  //         reply.header(key, value);
-  //       });
+      response.headers.forEach((value, key) => {
+        reply.header(key, value);
+      });
 
-  //       reply.header("request-id", req.id);
-  //       reply.status(response.status);
+      reply.status(response.status);
 
-  //       return reply.send(response.body);
-  //     },
-  //   });
+      return reply.send(response.body);
+    },
+  });
 
   fastify.listen(
     {

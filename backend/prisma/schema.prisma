@@ -1,28 +1,28 @@
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["tracing", "relationJoins", "fullTextSearch"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["tracing", "relationJoins", "fullTextSearch"]
 }
 
 datasource db {
-    provider = "postgresql"
-    url      = env("postgres://postgres:CHOSEN_PASSWORD@127.0.0.1:5432/shepherd_pre_onboarding_challenge")
+  provider = "postgresql"
+  url      = "postgres://postgres:postgres@127.0.0.1:5432/shepherd_pre_onboarding_challenge"
 }
 
 model Submission {
-    id                   String   @id @default(cuid())
-    contractorName       String
-    contractorEmail      String
-    contractorPhone      String
-    policyEffectiveDate  DateTime
-    policyExpirationDate DateTime
-    createdAt            DateTime @default(now())
-    updatedAt            DateTime @updatedAt
+  id                   String   @id @default(cuid())
+  contractorName       String
+  contractorEmail      String
+  contractorPhone      String
+  policyEffectiveDate  DateTime
+  policyExpirationDate DateTime
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
 }
 
 model User {
-    id        String   @id @default(cuid())
-    name      String
-    email     String
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
