@@ -1,5 +1,15 @@
 # Client
 
+## Command to run after Setup
+
+```
+yarn install # install dependencies
+yarn graphql:generate # generate graphql types and callers, this is create new files
+yarn dev # start nextjs server
+```
+
+## Setup
+
 ### Install Homebrew
 
 ```

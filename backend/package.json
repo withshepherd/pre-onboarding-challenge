@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "generate-pothos": "yarn ts-node --transpile-only scripts/generate-graphql-assets.ts",
     "dev": "nodemon --config nodemon.json src/index.ts",
     "predev": "prisma generate",
     "type-check": "tsc --project tsconfig.json --pretty --noEmit",

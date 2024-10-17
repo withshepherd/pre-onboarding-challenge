@@ -1,5 +1,15 @@
 # API
 
+## Command to run after Setup
+
+```
+yarn dev:db:migrate # initialize the database
+yarn dev:db:seed # add a dummy John Doe user to the database
+yarn dev # start the server
+```
+
+## Setup
+
 ### Install Homebrew
 
 ```
@@ -80,7 +90,7 @@ psql postgres
 Then run
 
 ```sql
-CREATE ROLE postgres WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD 'CHOOSE_PASSWORD';
+CREATE ROLE postgres WITH SUPERUSER CREATEDB CREATEROLE LOGIN ENCRYPTED PASSWORD postgres;
 ```
 
 Verify by running to see all the users
@@ -108,5 +118,5 @@ Then quit with
 Update `url` in `prisma/schema.prisma` to be the following:
 
 ```
-url      = env("postgres://postgres:CHOSEN_PASSWORD@127.0.0.1:5432/shepherd_pre_onboarding_challenge")
+url      = env("postgres://postgres:postgres@127.0.0.1:5432/shepherd_pre_onboarding_challenge")
 ```
